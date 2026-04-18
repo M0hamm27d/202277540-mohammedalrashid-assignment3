@@ -1,27 +1,72 @@
-//Getting current time
-const now = new Date();
-const hour = now.getHours(); //0-23
+// --- Visitor Persistence Logic ---
+const modal = document.getElementById('login-modal');
+const nameInput = document.getElementById('visitor-name');
+const continueBtn = document.getElementById('login-continue');
+const genderButtons = document.querySelectorAll('.gender-btn');
+let selectedGender = "";
 
-//Selecting where to show the greeting 
-const header = document.querySelector('#about-me');
-//Creating a new paragraph element
-const greeting = document.createElement('p');
+//1. Handle Gender Selection
+genderButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+        genderButtons.forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selectedGender = btn.getAttribute('data-gender');
+    });
+});
 
-//Setting text based on time 
-if (hour < 12) {
-    greeting.textContent = "Good morning";
-}
-else if (hour < 18) {
-    greeting.textContent = "Good afternoon";
-}
-else {
-    greeting.textContent = "Good evening";
+//2. Handle Continue Action
+continueBtn.addEventListener('click', () => {
+    const name = nameInput.value.trim();
+    if (name === "" || selectedGender === "") {
+        alert("Please provide both your name and gender!");
+        return;
+    }
+    //Save to Local Storage
+    localStorage.setItem('visitorName', name);
+    localStorage.setItem('visitorGender', selectedGender);
+    // Hide Modal and Update Greeting
+    modal.style.display = 'none';
+    displayGreeting();
+});
+//3. Function to Display the Personalized Greeting
+function displayGreeting() {
+    const storedName = localStorage.getItem('visitorName');
+    const storedGender = localStorage.getItem('visitorGender');
+    //If no name stored, keep modal visible
+    if (!storedName) {
+        modal.style.display = 'flex';
+        return;
+    }
+    // Otherwise, hide modal and show greeting
+    modal.style.display = 'none';
+    
+    const now = new Date();
+    const hour = now.getHours();
+    let timeGreeting = "";
+
+    if (hour < 12) timeGreeting = "Good morning";
+    else if (hour < 18) timeGreeting = "Good afternoon";
+    else timeGreeting = "Good evening";
+
+    const title = (storedGender === "male") ? "Mr." : "Miss";
+    
+    // Create the greeting element
+    const header = document.querySelector('#about-me');
+    
+    // Remove existing greeting if any (to avoid duplicates)
+    const existingGreeting = header.querySelector('.greeting');
+    if (existingGreeting) existingGreeting.remove();
+
+    const fullGreeting = document.createElement('p');
+    fullGreeting.classList.add('greeting');
+    fullGreeting.textContent = `${timeGreeting}, ${title} ${storedName}`;
+    
+    // Add to page
+    header.prepend(fullGreeting);
 }
 
-//Adding class for styling later 
-greeting.classList.add('greeting');
-//Inserting the greeting at the top of header
-header.prepend(greeting);
+// Run the check on page load
+displayGreeting();
 
 const toggleButton = document.getElementById("theme-toggle");
 //Is there a value stored under the key ‘theme’? "dark" || "light" || "null"
@@ -80,7 +125,7 @@ filterButtons.forEach(function (button) {
 const form = document.querySelector('#contact-form');
 
 //Selecting inputs
-const nameInput = document.querySelector('#name');
+const formNameInput = document.querySelector('#name'); // Renamed to avoid title conflict
 const emailInput = document.querySelector('#email');
 const messageInput = document.querySelector('#message');
 
@@ -94,7 +139,7 @@ form.addEventListener('submit', function (event) {
     event.preventDefault();
 
     //Check inputs
-    if (nameInput.value === '' || emailInput.value === '' || messageInput.value === '') {
+    if (formNameInput.value === '' || emailInput.value === '' || messageInput.value === '') {
 
         formMessage.textContent = "Please fill in all fields.";
         formMessage.style.color = "red";
@@ -120,4 +165,4 @@ form.addEventListener('submit', function (event) {
         form.reset();
     }
 
-});
+});

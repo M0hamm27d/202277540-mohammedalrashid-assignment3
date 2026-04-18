@@ -227,3 +227,58 @@ section {
     gap: 15px;
     margin-top: 20px;
 }
+
+/* --- Login Modal Styling --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    /* Dark semi-transparent background */
+    backdrop-filter: blur(8px);
+    /* Glass effect */
+    display: none;
+    /* We'll use JS to change this to 'none' when done */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.dark-theme .modal-content {
+    background: #1e1e1e;
+}
+
+.modal-input {
+    width: 100%;
+    padding: 12px;
+    margin: 20px 0;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.gender-selection {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+/* Class to highlight the selected gender */
+.gender-btn.selected {
+    background-color: #737397 !important;
+    color: white !important;
+}

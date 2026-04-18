@@ -8,6 +8,20 @@
 </head>
 
 <body>
+    <!-- Visitor Login Modal -->
+    <div id="login-modal" class="modal-overlay">
+        <div class="modal-content">
+            <h2>Welcome to my Portfolio!</h2>
+            <p>Before we start, could you tell me your name?</p>
+            <input type="text" id="visitor-name" placeholder="Enter your name here..." class="modal-input">
+            <p>And your gender?</p>
+            <div class="gender-selection">
+                <button type="button" class="btn btn-alt gender-btn" data-gender="male">Male</button>
+                <button type="button" class="btn btn-alt gender-btn" data-gender="female">Female</button>
+            </div>
+            <button id="login-continue" class="btn" style="margin-top: 20px; width: 100%;">Continue</button>
+        </div>
+    </div>
     <button id="theme-toggle" class="btn">Toggle Theme</button>
 
     <header id="about-me">
