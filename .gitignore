@@ -1,1 +1,16 @@
+# OS files
+.DS_Store
+Thumbs.db
 
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Node (if ever used)
+node_modules/
+package-lock.json
+
+# Misc
+*.log

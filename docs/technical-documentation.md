@@ -1,7 +1,7 @@
 # Technical Details
 
 A professional, responsive portfolio website designed to showcase web development projects.  
-This project demonstrates clean semantic HTML, advanced CSS layouts (Flexbox/Media Queries), dynamic JavaScript functionality, and interactive user enhancements.
+This project demonstrates clean semantic HTML, advanced CSS layouts (Flexbox/Media Queries), dynamic JavaScript functionality, interactive user enhancements, external API integration, and creative CSS pixel art animations.
 
 ---
 
@@ -45,6 +45,30 @@ Hovering project cards no longer disrupts adjacent elements.
 Ensures usability across devices with the new interactive features.
 * **Logic:** Media queries and flexbox adjustments maintain readability and interactive accessibility.  
 * **UX Benefit:** Users on tablets, phones, and desktops receive a consistent and optimized experience.
+
+### 8. Weather API Integration 🆕
+Real-time weather data displayed in the header card using the OpenWeatherMap API.
+* **Logic:** `fetch()` with `async/await` sends a request to the API. The response is parsed as JSON and temperature, description, and humidity are extracted.  
+* **Error Handling:** HTTP 401 triggers a "Demo Mode" fallback. Network errors display "Offline". Both ensure the UI never breaks.
+
+### 9. Geolocation-Based City Detection 🆕
+The weather widget automatically detects the visitor's city.
+* **Logic:** `navigator.geolocation.getCurrentPosition()` retrieves the user's latitude and longitude. These coordinates are passed to the API as `lat` and `lon` parameters.  
+* **Fallback:** If the user denies location access, the system defaults to Dhahran.
+
+### 10. Visitor Login & Persistence 🆕
+A welcome modal captures the visitor's name and gender on first visit.
+* **Logic:** On page load, JavaScript checks `localStorage` for `visitorName`. If absent, the modal is displayed. When submitted, name and gender are saved to `localStorage`.  
+* **Greeting:** A personalized greeting (e.g., "Good afternoon, Mr. Mohammed") is dynamically created and prepended to the header.
+
+### 11. Animated CSS Pixel Art Weather Icons 🆕
+Custom pixel art icons represent weather conditions using the CSS `box-shadow` technique.
+* **Logic:** Each icon state (sunny, cloudy, rainy, snowy) is a separate CSS class applied to a `::before` pseudo-element. The `box-shadow` property paints individual 4×4px pixels with multi-tone shading.  
+* **Independent Particles:** Rain drops and snowflakes are spawned as individual DOM elements via `spawnParticles()`, each with randomized `animation-delay` and `animation-duration` for independent movement.
+
+### 12. Weather Status → Icon Mapping 🆕
+The API description string is dynamically mapped to the correct pixel art class.
+* **Logic:** `updateWeatherUI()` checks the lowercase description for keywords like "clear", "cloud", "rain", "snow" and applies the corresponding CSS class (`sunny`, `cloudy`, `rainy`, `snowy`).
 
 ---
 
@@ -99,3 +123,31 @@ The site is designed with a **user-first mentality**, focusing on clarity, inter
 * Clear visual feedback for clickable elements.
 * Clear validation feedback for input elements.
 * Faster navigation using dynamic filtering instead of page reloads.
+
+---
+
+### 🆕 Advanced Experience (Assignment 3)
+
+#### 🔹 Step-by-Step Interaction Guide
+
+1. **First Visit**
+   * A glassmorphism modal appears asking for your name and gender.
+   * Select your gender and click **Continue**.
+   * A personalized greeting appears (e.g., "Good evening, Mr. Mohammed").
+
+2. **Weather Widget**
+   * The browser asks for your location permission.
+   * If you **Allow**, real-time weather for your exact location is displayed with an animated pixel art icon.
+   * If you **Deny**, weather defaults to Dhahran.
+   * If the API key is activating, a polished "Demo Mode" fallback is shown.
+
+3. **Returning Visits**
+   * The login modal does not appear again — your name and gender are remembered.
+   * The greeting updates based on the current time of day.
+
+#### 🆕 UX Improvements Introduced
+
+* Visitor persistence eliminates repetitive input on return visits.
+* Geolocation provides a personalized, location-aware experience.
+* Animated pixel art icons add a creative, engaging visual layer.
+* Robust fallback chain ensures the UI never displays broken or empty states.
