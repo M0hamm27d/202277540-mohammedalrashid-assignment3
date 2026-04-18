@@ -170,35 +170,33 @@ form.addEventListener('submit', function (event) {
 /* --- Real-Time Weather (Dynamic Location) --- */
 async function fetchWeather() {
     const apiKey = "8489ddbf4b91c654aca7ada2860fb79d";
-    
-    // Check if the browser supports Geolocation
+    //Check if the browser supports Geolocation
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(async (position) => {
             const lat = position.coords.latitude;
             const lon = position.coords.longitude;
-            
-            // Fetch by coordinates
+            //Fetch by coordinates
             const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
             await getWeatherData(url);
         }, async (error) => {
-            // Fallback to Dhahran if user denies location access
+            //Fallback to Dhahran if user denies location access
             console.warn("Location access denied. Falling back to default city.");
             const url = `https://api.openweathermap.org/data/2.5/weather?q=Dhahran&units=metric&appid=${apiKey}`;
             await getWeatherData(url);
         });
     } else {
-        // Browser doesn't support Geolocation
+        //Browser doesn't support Geolocation
         const url = `https://api.openweathermap.org/data/2.5/weather?q=Dhahran&units=metric&appid=${apiKey}`;
         await getWeatherData(url);
     }
 }
 
-// Separate function to handle the actual data fetching
+//Separate function to handle the actual data fetching
 async function getWeatherData(url) {
     try {
         const response = await fetch(url);
-        
-        // Handle 401 (Wait for API activation)
+
+        //Handle 401 (Wait for API activation)
         if (response.status === 401) {
             updateWeatherUI(32, "Clear Sky (Demo Mode)", 45);
             return;
@@ -215,13 +213,55 @@ async function getWeatherData(url) {
     }
 }
 
-// Helper function to update the screen
+//Helper function to update the screen
 function updateWeatherUI(temp, status, humidity) {
     document.getElementById('weather-temp').textContent = `${temp}°C`;
     document.getElementById('weather-status').textContent = status;
     document.getElementById('weather-humidity').textContent = humidity;
+
+    //Apply Pixel Art Icon based on status
+    const iconDiv = document.getElementById('weather-icon');
+    iconDiv.className = "pixel-icon"; //Reset classes
+
+    //Clear old particles
+    iconDiv.querySelectorAll('.rain-drop, .snow-flake').forEach(el => el.remove());
+    
+    const desc = status.toLowerCase();
+    if (desc.includes("clear")) {
+        iconDiv.classList.add("sunny");
+    } else if (desc.includes("cloud") || desc.includes("mist") || desc.includes("fog")) {
+        iconDiv.classList.add("cloudy");
+    } else if (desc.includes("rain") || desc.includes("drizzle") || desc.includes("thunder")) {
+        iconDiv.classList.add("rainy");
+        spawnParticles(iconDiv, 'rain-drop', 6);
+    } else if (desc.includes("snow")) {
+        iconDiv.classList.add("snowy");
+        spawnParticles(iconDiv, 'snow-flake', 5);
+    } else {
+        iconDiv.classList.add("sunny"); //Default
+    }
 }
 
-// Fetch on load
+//Spawn individual rain/snow pixels with staggered timing
+function spawnParticles(container, className, count) {
+    for (let i = 0; i < count; i++) {
+        const pixel = document.createElement('div');
+        pixel.classList.add(className);
+        //Spread across the cloud width (-14px to +14px from center)
+        pixel.style.left = (18 + Math.random() * 28) + 'px';
+        //Start just below the cloud body
+        pixel.style.top = '42px';
+        //Stagger each particle so they don't all fall at once
+        pixel.style.animationDelay = (Math.random() * 1.5) + 's';
+        //Slight speed variation
+        const baseDuration = className === 'rain-drop' ? 0.6 : 1.8;
+        pixel.style.animationDuration = (baseDuration + Math.random() * 0.5) + 's';
+        container.appendChild(pixel);
+    }
+}
+
+
+
+//Fetch on load
 fetchWeather();
 

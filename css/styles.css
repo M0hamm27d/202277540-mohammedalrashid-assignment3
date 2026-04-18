@@ -286,15 +286,15 @@ section {
 /* --- Weather Card Styling --- */
 .weather-card {
     display: inline-flex;
-    flex-direction: column;
+    flex-direction: row;
+    /* Horizontal layout for icon + info */
     align-items: center;
-    padding: 15px 25px;
-    background: rgba(115, 115, 151, 0.1);
-    /* Very light purple tint */
-    border: 1px solid rgba(115, 115, 151, 0.2);
-    border-radius: 15px;
+    gap: 20px;
+    padding: 20px 30px;
+    background: rgba(115, 115, 151, 0.08);
+    border: 1px solid rgba(115, 115, 151, 0.15);
+    border-radius: 20px;
     margin-top: 25px;
-    min-width: 150px;
 }
 
 .weather-info {
@@ -303,8 +303,260 @@ section {
     color: #737397;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
+
+/* --- Pixel Art Icons (Overhauled) --- */
+.pixel-icon {
+    width: 64px;
+    height: 64px;
+    position: relative;
+    image-rendering: pixelated;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.5s ease;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.45)) drop-shadow(0 0 3px rgba(0, 0, 0, 0.6));
+}
+
+/* Base pseudo-elements */
+.pixel-icon::before,
+.pixel-icon::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    height: 4px;
+}
+
+/* =============================================
+   1. SUNNY — Detailed Sun with 8 Rays + Pulse
+   ============================================= */
+.pixel-icon.sunny::before {
+    background: #ffcc00;
+    box-shadow:
+        /* --- Inner Highlight (top-left glow) --- */
+        -4px -8px #fff7cc, 0px -8px #fff7cc, -8px -4px #fff7cc, -4px -4px #fff1b8,
+        /* --- Core Body (5x5 block) --- */
+        -8px -8px #ffcc00, 0px -8px #ffcc00, 4px -8px #ffcc00, 8px -8px #ffcc00,
+        -8px -4px #ffcc00, 0px -4px #ffcc00, 4px -4px #ffcc00, 8px -4px #ffcc00,
+        -8px 0px #ffcc00, -4px 0px #ffcc00, 0px 0px #ffcc00, 4px 0px #ffcc00, 8px 0px #ffcc00,
+        -8px 4px #ffcc00, -4px 4px #ffcc00, 0px 4px #ffcc00, 4px 4px #ffcc00,
+        /* --- Bottom-Right Shadow --- */
+        8px 4px #e67e22, 8px 0px #e67e22, 8px -4px #e67e22,
+        -8px 8px #e67e22, -4px 8px #e67e22, 0px 8px #e67e22, 4px 8px #e67e22, 8px 8px #e67e22,
+        /* --- 8 Directional Rays --- */
+        /* Cardinal */
+        0px -16px #f1c40f, 0px -20px #f39c12,
+        0px 16px #f1c40f, 0px 20px #f39c12,
+        -16px 0px #f1c40f, -20px 0px #f39c12,
+        16px 0px #f1c40f, 20px 0px #f39c12,
+        /* Diagonal */
+        -12px -12px #f1c40f, -16px -16px #f39c12,
+        12px -12px #f1c40f, 16px -16px #f39c12,
+        -12px 12px #f1c40f, -16px 16px #f39c12,
+        12px 12px #f1c40f, 16px 16px #f39c12;
+    animation: rotateSun 15s linear infinite;
+}
+
+.pixel-icon.sunny {
+    filter: drop-shadow(0 0 18px rgba(255, 204, 0, 0.6)) drop-shadow(0 4px 10px rgba(0, 0, 0, 0.25));
+}
+
+@keyframes rotateSun {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+
+    25% {
+        transform: rotate(90deg) scale(1.05);
+    }
+
+    50% {
+        transform: rotate(180deg) scale(1.1);
+    }
+
+    75% {
+        transform: rotate(270deg) scale(1.05);
+    }
+
+    100% {
+        transform: rotate(360deg) scale(1);
+    }
+}
+
+/* =============================================
+   2. CLOUDY — Puffy Cloud + Static Sun Behind
+   ============================================= */
+.pixel-icon.cloudy::before {
+    background: #ecf0f1;
+    box-shadow:
+        /* --- Static Shaded Sun (peeking behind) --- */
+        10px -16px #fff1b8, 14px -16px #fff1b8,
+        6px -4px #e67e22, 10px -4px #e67e22, 14px -4px #e67e22, 18px -4px #e67e22, 22px -4px #e67e22,
+        22px -8px #e67e22, 22px -12px #e67e22, 22px -16px #e67e22, 22px -20px #e67e22,
+        6px -20px #ffcc00, 10px -20px #ffcc00, 14px -20px #ffcc00, 18px -20px #ffcc00,
+        6px -16px #ffcc00, 14px -16px #ffcc00, 18px -16px #ffcc00,
+        6px -12px #ffcc00, 10px -12px #ffcc00, 14px -12px #ffcc00, 18px -12px #ffcc00,
+        6px -8px #ffcc00, 10px -8px #ffcc00, 14px -8px #ffcc00, 18px -8px #ffcc00,
+        14px -28px #f1c40f, 14px 4px #f1c40f, -2px -12px #f1c40f, 30px -12px #f1c40f,
+        /* --- Puffy Cloud (4-row, highlight → shadow) --- */
+        /* Puffy Top */
+        -4px 0px #fdfdfd, 0px 0px #fdfdfd, 4px 0px #fdfdfd,
+        /* Highlight Row */
+        -8px 4px #fdfdfd, -4px 4px #fdfdfd, 0px 4px #fdfdfd, 4px 4px #fdfdfd, 8px 4px #fdfdfd,
+        /* Body Rows */
+        -12px 8px #ecf0f1, -8px 8px #ecf0f1, -4px 8px #ecf0f1, 0px 8px #ecf0f1, 4px 8px #ecf0f1, 8px 8px #ecf0f1, 12px 8px #ecf0f1,
+        -14px 12px #ecf0f1, -10px 12px #ecf0f1, -6px 12px #ecf0f1, -2px 12px #ecf0f1, 2px 12px #ecf0f1, 6px 12px #ecf0f1, 10px 12px #ecf0f1, 14px 12px #ecf0f1,
+        /* Shadow Rows */
+        -10px 16px #95a5a6, -6px 16px #95a5a6, -2px 16px #95a5a6, 2px 16px #95a5a6, 6px 16px #95a5a6, 10px 16px #95a5a6,
+        -6px 20px #7f8c8d, 0px 20px #7f8c8d, 6px 20px #7f8c8d;
+    animation: floatCloud 4s ease-in-out infinite;
+}
+
+/* =============================================
+   3. RAINY — Cloud (::before) + Rain (::after)
+   ============================================= */
+.pixel-icon.rainy::before {
+    background: #95a5a6;
+    box-shadow:
+        /* Puffy Top */
+        -4px 0px #bdc3c7, 0px 0px #bdc3c7, 4px 0px #bdc3c7,
+        /* Highlight */
+        -8px 4px #bdc3c7, -4px 4px #bdc3c7, 0px 4px #bdc3c7, 4px 4px #bdc3c7, 8px 4px #bdc3c7,
+        /* Body */
+        -12px 8px #95a5a6, -8px 8px #95a5a6, -4px 8px #95a5a6, 0px 8px #95a5a6, 4px 8px #95a5a6, 8px 8px #95a5a6, 12px 8px #95a5a6,
+        -14px 12px #95a5a6, -10px 12px #95a5a6, -6px 12px #95a5a6, -2px 12px #95a5a6, 2px 12px #95a5a6, 6px 12px #95a5a6, 10px 12px #95a5a6, 14px 12px #95a5a6,
+        /* Shadow */
+        -10px 16px #7f8c8d, -6px 16px #7f8c8d, -2px 16px #7f8c8d, 2px 16px #7f8c8d, 6px 16px #7f8c8d, 10px 16px #7f8c8d;
+    animation: floatCloud 5s ease-in-out infinite;
+}
+
+/* Rain drops — fall independently from the cloud */
+.pixel-icon.rainy::after {
+    content: none;
+}
+
+/* Snow — individual flakes, no pseudo-element */
+.pixel-icon.snowy::after {
+    content: none;
+}
+
+/* =============================================
+   4. SNOWY — Cloud (::before) + Independent Flakes
+   ============================================= */
+.pixel-icon.snowy::before {
+    background: #ffffff;
+    box-shadow:
+        /* Puffy Top */
+        -4px 0px #fdfdfd, 0px 0px #fdfdfd, 4px 0px #fdfdfd,
+        /* Highlight */
+        -8px 4px #fdfdfd, -4px 4px #fdfdfd, 0px 4px #fdfdfd, 4px 4px #fdfdfd, 8px 4px #fdfdfd,
+        /* Body */
+        -12px 8px #ffffff, -8px 8px #ffffff, -4px 8px #ffffff, 0px 8px #ffffff, 4px 8px #ffffff, 8px 8px #ffffff, 12px 8px #ffffff,
+        -14px 12px #ffffff, -10px 12px #ffffff, -6px 12px #ffffff, -2px 12px #ffffff, 2px 12px #ffffff, 6px 12px #ffffff, 10px 12px #ffffff, 14px 12px #ffffff,
+        /* Shadow */
+        -10px 16px #ecf0f1, -6px 16px #ecf0f1, -2px 16px #ecf0f1, 2px 16px #ecf0f1, 6px 16px #ecf0f1, 10px 16px #ecf0f1;
+    animation: floatCloud 6s ease-in-out infinite;
+}
+
+.pixel-icon.snowy {
+    filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.7)) drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+}
+
+
+/* --- Individual Particle Classes --- */
+.rain-drop {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #3498db;
+    image-rendering: pixelated;
+    animation: rainFall 0.8s linear infinite;
+}
+
+.snow-flake {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: #ffffff;
+    image-rendering: pixelated;
+    border-radius: 0;
+    animation: snowFall 2s ease-in-out infinite;
+}
+
+@keyframes rainFall {
+    0% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+
+    85% {
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translateY(28px);
+        opacity: 0;
+    }
+}
+
+@keyframes snowFall {
+    0% {
+        transform: translateX(0px) translateY(0px);
+        opacity: 1;
+    }
+
+    25% {
+        transform: translateX(-3px) translateY(7px);
+        opacity: 1;
+    }
+
+    50% {
+        transform: translateX(2px) translateY(14px);
+        opacity: 0.8;
+    }
+
+    75% {
+        transform: translateX(-2px) translateY(21px);
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: translateX(0px) translateY(28px);
+        opacity: 0;
+    }
+}
+
+
+
+/* =============================================
+   Shared Keyframes
+   ============================================= */
+@keyframes floatCloud {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+
+    25% {
+        transform: translateY(-3px) translateX(1px);
+    }
+
+    50% {
+        transform: translateY(-5px) translateX(3px);
+    }
+
+    75% {
+        transform: translateY(-2px) translateX(1px);
+    }
+
+    100% {
+        transform: translateY(0) translateX(0);
+    }
+}
+
+
+
+
 
 #weather-status {
     font-size: 0.9rem;
