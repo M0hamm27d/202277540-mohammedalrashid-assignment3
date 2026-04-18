@@ -1,0 +1,97 @@
+/*For dark theme for Body*/
+.dark-theme {
+    background-color: #121212;
+    color: white;
+}
+
+/*For dark theme for all <a> links*/
+.dark-theme a {
+    color: #90caf9;
+}
+
+/*For dark theme for buttons*/
+.dark-theme button {
+    background-color: rgb(54, 54, 79);
+    color: white;
+}
+
+.profile-image{
+    width: 250px;
+    max-width: 100%; /*Prevent overflow on small screen*/
+    height: 250px;   /*Keeps aspect ratio*/
+    margin: 0 auto; /*It tells the browser to split the reamining sapce equally to Right and left*/
+}
+
+header{
+    display: flex; /*Activate flex box*/
+    align-items: center; /*vertical alignment*/
+    justify-content: space-between; /*space between text and image*/
+    flex-wrap: wrap; /*whether flex items are forced onto a single line or not*/
+}
+
+article{
+    padding:20px;
+}
+
+.greeting {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+
+/*For mobile layout
+(min-width: 769px) → only apply for large screens
+(orientation: portrait) → apply when device is vertical
+*/
+@media (max-width: 768px) and (orientation: portrait){
+    body {
+        flex-direction: column; /*Stackign vertically*/
+        text-align: center; /*centers the text in the column*/
+        
+    }
+
+    .profile-image{
+        margin-top: 20px;
+    }
+}
+/*For project filters*/
+.filter-btn.active{
+    background-color: rgb(115, 115, 151);
+    color: white;
+}
+/*For spacing between filter buttons and projects*/
+.project-filters{
+    margin-bottom: 20px;
+}
+/*For hover effects on buttons and projects*/
+button {
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+/*For hover effect on buttons*/
+button:hover{
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
+}
+/*For hover effect on projects*/
+.project{
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+/*For hover effect on projects*/
+.project:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+/*For fade-in animation on sections*/
+section{
+    animation: fadeIn 0.8s ease-in;
+}
+/*Keyframes for fade-in animation*/
+@keyframes fadeIn{
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
