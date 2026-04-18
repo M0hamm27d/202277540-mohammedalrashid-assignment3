@@ -15,25 +15,70 @@
     color: white;
 }
 
-.profile-image {
-    width: 250px;
-    max-width: 100%;
-    /*Prevent overflow on small screen*/
-    height: 250px;
-    /*Keeps aspect ratio*/
-    margin: 0 auto;
-    /*It tells the browser to split the reamining sapce equally to Right and left*/
+/* --- Header Card Section --- */
+header#about-me {
+    display: flex;
+    flex-wrap: wrap;
+    /* Allow greeting to take full width */
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 40px;
+    margin: 10px 0;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
 }
 
-header {
-    display: flex;
-    /*Activate flex box*/
-    align-items: center;
-    /*vertical alignment*/
-    justify-content: space-between;
-    /*space between text and image*/
-    flex-wrap: wrap;
-    /*whether flex items are forced onto a single line or not*/
+.greeting {
+    width: 100%;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+    color: #555;
+    order: -1;
+    /* Forces it to the top */
+}
+
+.dark-theme .greeting {
+    color: #bbb;
+}
+
+header#about-me:hover {
+    transform: translateY(-5px);
+}
+
+.dark-theme header#about-me {
+    background-color: #1e1e1e;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+}
+
+header#about-me div {
+    flex: 1;
+}
+
+.profile-image {
+    width: 200px;
+    height: 200px;
+    border-radius: 15px;
+    object-fit: cover;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 768px) {
+    header#about-me {
+        flex-direction: column;
+        text-align: center;
+        padding: 30px 20px;
+    }
+
+    .profile-image {
+        width: 150px;
+        height: 150px;
+        margin-top: 20px;
+    }
 }
 
 article {
@@ -98,6 +143,20 @@ button:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
+.project img {
+    border-radius: 15px;
+    object-fit: cover;
+    width: 25%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    margin-top: 15px;
+}
+
+.project:hover img {
+    transform: scale(1.02);
+}
+
+
 /*For fade-in animation on sections*/
 section {
     animation: fadeIn 0.8s ease-in;
@@ -118,5 +177,46 @@ section {
 #form-message {
     font-weight: bold;
     margin: 5px 0;
-    display: none; /* Hidden by default */
+    display: none;
+    /* Hidden by default */
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 28px;
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-alt {
+    background-color: transparent;
+    border: 2px solid #333;
+    color: #333;
+}
+
+.btn:hover {
+    filter: brightness(1.2);
+    transform: scale(1.05);
+}
+
+/* Dark Mode support for buttons */
+.dark-theme .btn {
+    background-color: #eee;
+    color: #111;
+}
+
+.dark-theme .btn-alt {
+    background-color: transparent;
+    border: 2px solid #eee;
+    color: #eee;
 }
