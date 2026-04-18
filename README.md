@@ -2,7 +2,7 @@
 
 A professional, responsive portfolio website designed to showcase web development projects.  
 ⚪ **Assignment 1**: Demonstrated clean semantic HTML, advanced CSS layouts (Flexbox/Media Queries), and dynamic JavaScript functionality.  
-🆕 **Assignment 2**: Added user-interactive enhancements such as section toggles, hover effects, and animation.
+⚪ **Assignment 2**: Added user-interactive enhancements such as section toggles, hover effects, and animation.
 
 ---
 
@@ -37,8 +37,8 @@ This portfolio implements interactive and modern web features to enhance usabili
 
 * ⚪ Basic project sections with semantic HTML structure (Assignment 1).  
 * ⚪ Theme Persistence: Dark/light mode toggle that remembers the user preference using `localStorage`(Assignment 1).  
-* 🆕 Section Filters: Buttons to dynamically show/hide different project categories.  
-* 🆕 Interactive Hover Effects: Buttons and project cards have smooth feedback using `transform`, `box-shadow`, and CSS transitions.  
+* ⚪ Section Filters: Buttons to dynamically show/hide different project categories.  
+* ⚪ Interactive Hover Effects: Buttons and project cards have smooth feedback using `transform`, `box-shadow`, and CSS transitions.  
 
 
 ---
@@ -60,19 +60,19 @@ During development:
 
 | File | Role |
 | :--- | :--- |
-| 🆕 `index.html` | Semantic HTML structure for content, sections, and accessibility. |
+| ⚪ `index.html` | Semantic HTML structure for content, sections, and accessibility. |
 | ⚪ `css/styles.css` | Layout styling, dark theme, responsive media queries. |
-| 🆕 `css/styles.css` | Hover animations, section toggles, interactive feedback. |
+| ⚪ `css/styles.css` | Hover animations, section toggles, interactive feedback. |
 | ⚪ `js/script.js` | Greeting, theme toggle logic. |
-| 🆕 `js/script.js` | Section filtering, button interaction logic. |
+| ⚪ `js/script.js` | Section filtering, button interaction logic. |
 | ⚪ `/assets/images/` | Optimized project and profile images (WebP/JPG). |
-| 🆕 `/docs/ai-usage-report.md` | AI usage report and reflections. |
-| 🆕 `/docs/technical-documentation.md` | Technical documentation for new features and logic. |
+| ⚪ `/docs/ai-usage-report.md` | AI usage report and reflections. |
+| ⚪ `/docs/technical-documentation.md` | Technical documentation for new features and logic. |
 
 ---
 
 ## 📌 Notes
 
 * ⚪ Focused on usability and responsive design (Assignment 1).  
-* 🆕 Emphasis on **interactive and modern features**, fully functional across devices.  
+* ⚪ Emphasis on **interactive and modern features**, fully functional across devices.  
 * All new features were implemented with careful testing, preserving professional design and layout integrity.

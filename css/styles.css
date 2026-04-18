@@ -15,22 +15,29 @@
     color: white;
 }
 
-.profile-image{
+.profile-image {
     width: 250px;
-    max-width: 100%; /*Prevent overflow on small screen*/
-    height: 250px;   /*Keeps aspect ratio*/
-    margin: 0 auto; /*It tells the browser to split the reamining sapce equally to Right and left*/
+    max-width: 100%;
+    /*Prevent overflow on small screen*/
+    height: 250px;
+    /*Keeps aspect ratio*/
+    margin: 0 auto;
+    /*It tells the browser to split the reamining sapce equally to Right and left*/
 }
 
-header{
-    display: flex; /*Activate flex box*/
-    align-items: center; /*vertical alignment*/
-    justify-content: space-between; /*space between text and image*/
-    flex-wrap: wrap; /*whether flex items are forced onto a single line or not*/
+header {
+    display: flex;
+    /*Activate flex box*/
+    align-items: center;
+    /*vertical alignment*/
+    justify-content: space-between;
+    /*space between text and image*/
+    flex-wrap: wrap;
+    /*whether flex items are forced onto a single line or not*/
 }
 
-article{
-    padding:20px;
+article {
+    padding: 20px;
 }
 
 .greeting {
@@ -44,54 +51,72 @@ article{
 (min-width: 769px) → only apply for large screens
 (orientation: portrait) → apply when device is vertical
 */
-@media (max-width: 768px) and (orientation: portrait){
+@media (max-width: 768px) and (orientation: portrait) {
     body {
-        flex-direction: column; /*Stackign vertically*/
-        text-align: center; /*centers the text in the column*/
-        
+        flex-direction: column;
+        /*Stackign vertically*/
+        text-align: center;
+        /*centers the text in the column*/
+
     }
 
-    .profile-image{
+    .profile-image {
         margin-top: 20px;
     }
 }
+
 /*For project filters*/
-.filter-btn.active{
+.filter-btn.active {
     background-color: rgb(115, 115, 151);
     color: white;
 }
+
 /*For spacing between filter buttons and projects*/
-.project-filters{
+.project-filters {
     margin-bottom: 20px;
 }
+
 /*For hover effects on buttons and projects*/
 button {
     transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
+
 /*For hover effect on buttons*/
-button:hover{
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+button:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
     transform: translateY(-2px);
 }
+
 /*For hover effect on projects*/
-.project{
+.project {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
 /*For hover effect on projects*/
-.project:hover{
+.project:hover {
     transform: translateY(-5px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
+
 /*For fade-in animation on sections*/
-section{
+section {
     animation: fadeIn 0.8s ease-in;
 }
+
 /*Keyframes for fade-in animation*/
-@keyframes fadeIn{
-    from{
+@keyframes fadeIn {
+    from {
         opacity: 0;
     }
-    to{
+
+    to {
         opacity: 1;
     }
+}
+
+/*For form validation message*/
+#form-message {
+    font-weight: bold;
+    margin: 5px 0;
+    display: none; /* Hidden by default */
 }

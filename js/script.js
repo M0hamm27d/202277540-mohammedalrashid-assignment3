@@ -98,12 +98,16 @@ form.addEventListener('submit', function(event){
 
         formMessage.textContent = "Please fill in all fields.";
         formMessage.style.color = "red";
+        formMessage.style.display = "block";
+        formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
     }
     else{
 
         formMessage.textContent = "Message sent successfully!";
         formMessage.style.color = "green";
+        formMessage.style.display = "block";
+        formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
 
         form.reset();
     }

@@ -24,19 +24,19 @@ Layout adjusts for multiple screen sizes:
 * **Mobile (< 768px):** `flex-direction: column` with stacked content for portrait orientation.  
 * **Images:** `max-width: 100%` and fixed height to prevent overflow.
 
-### 4. Section Filters 🆕
+### 4. Section Filters ⚪
 Users can filter project cards by category using interactive buttons.
 * **Logic:** Buttons are linked to project categories via `data-attributes`.  
 * **Implementation:**  
   * Clicking a button triggers an event listener.  
   * JavaScript iterates over all project cards and toggles their visibility using `.style.display`.
 
-### 5. Interactive Hover Effects 🆕
+### 5. Interactive Hover Effects ⚪
 Subtle animations provide feedback for buttons and project cards.
 * **Logic:** CSS `transform`, `box-shadow`, and transitions are applied on `:hover`.  
 * **UX Benefit:** Improves perceived responsiveness and guides user interactions.
 
-### 6. Layout Stability 🆕
+### 6. Layout Stability ⚪
 Hovering project cards no longer disrupts adjacent elements.
 * **Logic:** Minor `translateY` and `box-shadow` changes ensure elements don’t overlap or move the layout unexpectedly.  
 * **UX Benefit:** Smooth, stable interactions enhance professionalism and readability.
@@ -69,7 +69,7 @@ The site is designed with a **user-first mentality**, focusing on clarity, inter
 
 ---
 
-### 🆕 Interactive Experience (Assignment 2)
+### ⚪ Interactive Experience (Assignment 2)
 
 #### 🔹 Step-by-Step Interaction Guide
 
@@ -93,7 +93,7 @@ The site is designed with a **user-first mentality**, focusing on clarity, inter
 
 ---
 
-### 🆕 UX Improvements Introduced
+### ⚪ UX Improvements Introduced
 
 * Reduced layout shifting during hover interactions.
 * Clear visual feedback for clickable elements.
