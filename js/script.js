@@ -39,7 +39,7 @@ function displayGreeting() {
     }
     // Otherwise, hide modal and show greeting
     modal.style.display = 'none';
-    
+
     const now = new Date();
     const hour = now.getHours();
     let timeGreeting = "";
@@ -49,10 +49,10 @@ function displayGreeting() {
     else timeGreeting = "Good evening";
 
     const title = (storedGender === "male") ? "Mr." : "Miss";
-    
+
     // Create the greeting element
     const header = document.querySelector('#about-me');
-    
+
     // Remove existing greeting if any (to avoid duplicates)
     const existingGreeting = header.querySelector('.greeting');
     if (existingGreeting) existingGreeting.remove();
@@ -60,7 +60,7 @@ function displayGreeting() {
     const fullGreeting = document.createElement('p');
     fullGreeting.classList.add('greeting');
     fullGreeting.textContent = `${timeGreeting}, ${title} ${storedName}`;
-    
+
     // Add to page
     header.prepend(fullGreeting);
 }
@@ -165,4 +165,63 @@ form.addEventListener('submit', function (event) {
         form.reset();
     }
 
-});
+});
+
+/* --- Real-Time Weather (Dynamic Location) --- */
+async function fetchWeather() {
+    const apiKey = "8489ddbf4b91c654aca7ada2860fb79d";
+    
+    // Check if the browser supports Geolocation
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(async (position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            
+            // Fetch by coordinates
+            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+            await getWeatherData(url);
+        }, async (error) => {
+            // Fallback to Dhahran if user denies location access
+            console.warn("Location access denied. Falling back to default city.");
+            const url = `https://api.openweathermap.org/data/2.5/weather?q=Dhahran&units=metric&appid=${apiKey}`;
+            await getWeatherData(url);
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        const url = `https://api.openweathermap.org/data/2.5/weather?q=Dhahran&units=metric&appid=${apiKey}`;
+        await getWeatherData(url);
+    }
+}
+
+// Separate function to handle the actual data fetching
+async function getWeatherData(url) {
+    try {
+        const response = await fetch(url);
+        
+        // Handle 401 (Wait for API activation)
+        if (response.status === 401) {
+            updateWeatherUI(32, "Clear Sky (Demo Mode)", 45);
+            return;
+        }
+
+        if (!response.ok) throw new Error("Weather data not available");
+
+        const data = await response.json();
+        updateWeatherUI(Math.round(data.main.temp), data.weather[0].description, data.main.humidity);
+
+    } catch (error) {
+        console.error("Error fetching weather:", error);
+        document.getElementById('weather-status').textContent = "Offline";
+    }
+}
+
+// Helper function to update the screen
+function updateWeatherUI(temp, status, humidity) {
+    document.getElementById('weather-temp').textContent = `${temp}°C`;
+    document.getElementById('weather-status').textContent = status;
+    document.getElementById('weather-humidity').textContent = humidity;
+}
+
+// Fetch on load
+fetchWeather();
+
