@@ -110,27 +110,68 @@ article {
     }
 }
 
-/*For project filters*/
+/* --- Unified Button Styling --- */
+button,
+.btn {
+    display: inline-block;
+    padding: 10px 24px;
+    background-color: #737397;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+button:hover,
+.btn:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    filter: brightness(1.1);
+}
+
+.btn-alt {
+    background-color: transparent !important;
+    border: 2px solid #737397 !important;
+    color: #737397 !important;
+}
+
+/* Specific button overrides */
+#theme-toggle {
+    padding: 8px 16px;
+    font-size: 0.85rem;
+}
+
+.filter-btn {
+    padding: 6px 18px;
+    background-color: transparent;
+    border: 2px solid #737397;
+    color: #737397;
+    border-radius: 20px;
+    /* More rounded for filters */
+}
+
 .filter-btn.active {
-    background-color: rgb(115, 115, 151);
+    background-color: #737397;
     color: white;
 }
 
-/*For spacing between filter buttons and projects*/
-.project-filters {
-    margin-bottom: 20px;
+/* Dark Mode support */
+.dark-theme button,
+.filter-btn.active,
+.dark-theme .btn {
+    background-color: #9494b8;
+    color: #111;
 }
 
-/*For hover effects on buttons and projects*/
-button {
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+.dark-theme .btn-alt,
+.dark-theme .filter-btn {
+    border-color: #9494b8;
+    color: #111;
 }
 
-/*For hover effect on buttons*/
-button:hover {
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    transform: translateY(-2px);
-}
 
 /*For hover effect on projects*/
 .project {
@@ -185,38 +226,4 @@ section {
     display: flex;
     gap: 15px;
     margin-top: 20px;
-}
-
-.btn {
-    display: inline-block;
-    padding: 12px 28px;
-    background-color: #333;
-    color: white;
-    text-decoration: none;
-    border-radius: 10px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.btn-alt {
-    background-color: transparent;
-    border: 2px solid #333;
-    color: #333;
-}
-
-.btn:hover {
-    filter: brightness(1.2);
-    transform: scale(1.05);
-}
-
-/* Dark Mode support for buttons */
-.dark-theme .btn {
-    background-color: #eee;
-    color: #111;
-}
-
-.dark-theme .btn-alt {
-    background-color: transparent;
-    border: 2px solid #eee;
-    color: #eee;
 }
